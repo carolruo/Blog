@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Carolina Vendramini</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Carol's Ideas</a>
+                <a href="/newpost" class="btn btn-primary" role="button">Novo Post</a>
+            </div>
+        </nav>
+    </header>
+
+    <section>
+        <div class="container" style="width:60%; padding-bottom: 30px">
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" style="padding-top: 15px;">
+                    <li class="breadcrumb-item active" aria-current="page">Home</li>
+                </ol>
+            </nav>
+
+            <div class="card shadow-sm bg-white rounded" th:each="post : ${posts}" style="margin-bottom: 10px;">
+                <div class="card-body">
+                    <p class="card-subtitle mb-2 text-muted" style="font-size: 0.9rem;">
+                        <span th:text="${post.author}"></span>
+                        <span th:text="${post.date}"></span>
+                    </p>
+                    <a th:href="${(#mvc.url('BC#getPostDetails').arg(0, post.id)).build()}"><h4 class="card-title">
+                        <span th:text="${post.title}"></span>
+                    </h4></a>
+                    <p class="card-text"><span th:utext="${#strings.abbreviate(post.text,400)}"></span></p>
+                    <a th:href="${(#mvc.url('BC#getPostDetails').arg(0, post.id)).build()}" class="btn btn-primary">Ler mais</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+</html>
