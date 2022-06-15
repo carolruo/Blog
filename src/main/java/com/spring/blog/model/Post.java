@@ -1,17 +1,18 @@
 package com.spring.blog.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.jsoup.Jsoup;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="TB_POST")
+@Table(name = "TB_POST")
 public class Post {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank
@@ -62,5 +63,9 @@ public class Post {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String truncatedText() {
+        return Jsoup.parse(text).text();
     }
 }

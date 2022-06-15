@@ -13,7 +13,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] AUTH_LIST = {
-            "/",
             "/posts",
             "/posts/{id}"
     };
@@ -30,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.inMemoryAuthentication()
-                .withUser("michelli").password("{noop}123").roles("ADMIN");
+                .withUser("carol").password("{noop}123").roles("ADMIN");
     }
 
     @Override

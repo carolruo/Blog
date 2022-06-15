@@ -4,6 +4,7 @@ import com.spring.blog.model.Post;
 import com.spring.blog.repository.BlogRepository;
 import com.spring.blog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public List<Post> findAll() {
-        return blogRepository.findAll();
+        return blogRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
     @Override
@@ -29,5 +30,10 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Post save(Post post) {
         return blogRepository.save(post);
+    }
+
+    @Override
+    public void delete(long id) {
+        blogRepository.deleteById(id);
     }
 }
